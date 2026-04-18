@@ -1,5 +1,6 @@
 package com.example.laboratorio_1
 
+import android.util.Log
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
+        Log.d("MainActivity", "Minha primeira mensagem de depuração.")
     }
 
 }

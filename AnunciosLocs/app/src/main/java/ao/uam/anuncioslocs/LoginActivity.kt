@@ -7,7 +7,7 @@ import android.text.Spanned
 import android.text.style.UnderlineSpan
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import ao.uam.fc.anuncioslocs.databinding.ActivityLoginBinding
+import ao.uam.anuncioslocs.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 

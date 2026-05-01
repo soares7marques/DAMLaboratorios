@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ao.uam.anuncioslocs"
+    namespace = "com.example.servicelab2"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "ao.uam.anuncioslocs"
+        applicationId = "com.example.servicelab2"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -17,9 +17,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
     buildTypes {
         release {
             isMinifyEnabled = false

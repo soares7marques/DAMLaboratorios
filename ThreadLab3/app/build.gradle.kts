@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "ao.uam.anuncioslocs"
+    namespace = "ao.uam.threadlab3"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "ao.uam.anuncioslocs"
-        minSdk = 26
+        applicationId = "ao.uam.threadlab3"
+        minSdk = 27
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -17,9 +17,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -45,13 +42,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("com.google.android.gms:play-services-location:21.0.1")
-    //Retrofit para chamadas com . google . firebase . crashlytics . buildtools . reloc . org . apache . http . protocol . HTTP
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    // Conversor GSON para transformar JSON em objetos Kotlin
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    // Coroutines para não travar a interface do telemóvel
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -2,12 +2,13 @@ package ao.uam.anuncioslocs
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log // Importação necessária para o Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
-import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
 
@@ -17,6 +18,19 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        // --- CAPTURA DOS DADOS VINDOS DO LOGIN ---
+        val ticket = intent.getStringExtra("TICKET")
+        val sessionKey = intent.getStringExtra("SESSION_KEY")
+
+        // Exibe no Logcat para confirmar que os dados chegaram
+        Log.d("HOME_DADOS", "Recebido na Home - Ticket: $ticket, Session: $sessionKey")
+
+        // Opcional: Mostrar um aviso se os dados chegaram (para teste)
+        if (ticket != null) {
+            Toast.makeText(this, "Sessão iniciada com sucesso", Toast.LENGTH_SHORT).show()
+        }
+        // -----------------------------------------
 
         setupRecyclerView()
         setupBottomNavigation()
@@ -44,13 +58,11 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
 
-
                 R.id.nav_location -> {
                     startActivity(Intent(this, LocationListActivity::class.java))
                     finish()
                     true
                 }
-
 
                 R.id.nav_profile -> {
                     startActivity(Intent(this, ProfileActivity::class.java))
@@ -74,7 +86,6 @@ class HomeActivity : AppCompatActivity() {
         btnOldPosts2.setOnClickListener {
             loadOldPosts()
         }
-
     }
 
     private fun loadAnnouncements() {

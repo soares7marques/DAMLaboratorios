@@ -158,13 +158,47 @@
             android:drawableTint="@color/input_icon_tint" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- NOVO: Campo Raio -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilRaio"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        app:hintEnabled="false"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeWidth="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilLatitude">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRaio"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_input_rounded"
+            android:hint="Raio"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:inputType="numberDecimal"
+            android:textColor="@color/text_dark"
+            android:textColorHint="@color/input_hint"
+            android:drawableTint="@color/input_icon_tint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Botão Criar -->
+
+    <!-- Texto informativo -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCriarLocalizacao"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="108dp"
         android:text="Criar Localizacao"
         android:textAllCaps="false"
         android:textSize="16sp"
@@ -172,15 +206,15 @@
         app:backgroundTint="#4A5FC1"
         app:cornerRadius="28dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilLatitude" />
 
-    <!-- Texto informativo -->
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Cadastre uma localizacao para fazer\nteus anuncios personalizados"
         android:textColor="#CCCCCC"

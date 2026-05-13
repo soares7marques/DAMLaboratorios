@@ -2,12 +2,11 @@ package ao.uam.anuncioslocs
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.UnderlineSpan
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import ao.uam.anuncioslocs.databinding.ActivityRegisterBinding
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -18,69 +17,82 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        configurarTextoLogin()
         configurarBotoes()
-
-
-    }
-
-
-    private fun configurarTextoLogin() {
-        val textoCompleto = "Ja tenho conta"
-        val spannable = SpannableString(textoCompleto)
-        val inicio = textoCompleto.indexOf("Ja tenho conta")
-        if (inicio != -1) {
-            spannable.setSpan(UnderlineSpan(), inicio, textoCompleto.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            binding.tvGoToLogin.text = spannable
-        }
     }
 
     private fun configurarBotoes() {
         binding.btnRegister.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim()
-            val utilizador = binding.etUsername.text.toString().trim()
+            // Captura os 3 campos
+            val name = binding.etUsername.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim() // Seu email
             val senha = binding.etPassword.text.toString().trim()
 
-            if (validarCampos(email, utilizador, senha)) {
-                Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
-                navegarParaLogin()
+            // Valida os 4 parâmetros (incluindo o nome)
+            if (validarCampos(name,email, senha)) {
+                executarCadastro(name,email, senha)
             }
         }
 
+        // AÇÃO PARA VOLTAR AO LOGIN
         binding.tvGoToLogin.setOnClickListener {
-            navegarParaLogin()
+            finish() // Fecha a RegisterActivity e volta para a LoginActivity
         }
     }
 
-    private fun validarCampos(email: String, utilizador: String, senha: String): Boolean {
+    private fun executarCadastro(name: String, email: String, senha: String) {
+        lifecycleScope.launch {
+            try {
+                // Criar o objeto com Nome, email e Senha
+                val request = RegistroRequest(
+                    name = name,
+                    email = email,
+                    senha = senha
+                )
+
+                // Chama o Retrofit
+                val response = RetrofitClient.apiServiceCentral.fazerRegistro(request)
+
+                if (response.isSuccessful) {
+                    Toast.makeText(this@RegisterActivity, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                    finish()
+                } else {
+                    val erro = response.errorBody()?.string() ?: "Erro desconhecido"
+                    Toast.makeText(this@RegisterActivity, "Falha: $erro", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Erro de rede (IP do Hotspot, Firewall ou Servidor desligado)
+                Toast.makeText(this@RegisterActivity, "Erro de rede: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun validarCampos(name: String, email: String, senha: String): Boolean {
         var valido = true
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmail.error = "E-mail inválido"
+        // Validação do Nome
+        if (name.isEmpty()) {
+            binding.etUsername.error = "O nome é obrigatório"
             valido = false
         } else {
-            binding.tilEmail.error = null
+            binding.etUsername.error = null
         }
 
-        if (utilizador.isEmpty()) {
-            binding.tilUsername.error = "Preencha o utilizador"
+        // Validação do Email/Utilizador
+        if (email.isEmpty()) {
+            binding.etEmail.error = "Campo obrigatório"
             valido = false
         } else {
-            binding.tilUsername.error = null
+            binding.etEmail.error = null
         }
 
+        // Validação da Senha
         if (senha.length < 6) {
-            binding.tilPassword.error = "Mínimo 6 caracteres"
+            binding.etPassword.error = "Mínimo 6 caracteres"
             valido = false
         } else {
-            binding.tilPassword.error = null
+            binding.etPassword.error = null
         }
         return valido
-    }
-
-    private fun navegarParaLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }

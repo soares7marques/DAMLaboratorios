@@ -58,6 +58,33 @@
             android:textStyle="bold"
             android:layout_marginBottom="48dp" />
 
+        <!-- Input nome -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUsername"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeWidth="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_input_rounded"
+                android:hint="nome"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="12dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:inputType="text"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/input_hint"
+                android:drawableTint="@color/input_icon_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- Input E-mail -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmail"
@@ -80,33 +107,6 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/text_dark"
-                android:textColorHint="@color/input_hint"
-                android:drawableTint="@color/input_icon_tint" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Input Utilizador -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilUsername"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:hintEnabled="false"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeWidth="0dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUsername"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_input_rounded"
-                android:hint="Utilizador"
-                android:drawableStart="@drawable/ic_user"
-                android:drawablePadding="12dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:inputType="text"
                 android:textColor="@color/text_dark"
                 android:textColorHint="@color/input_hint"
                 android:drawableTint="@color/input_icon_tint" />
